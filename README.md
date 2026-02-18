@@ -1,1 +1,3 @@
-# CP-Journey
+# Competitive Programming
+
+### My solutions in CP-Journy
