@@ -1,6 +1,6 @@
 /* Deliberate practice > blind repetition */
 // Author: Belal
-// URL: 
+// URL: https://codeforces.com/problemset/problem/547/B
 
 
 #include<set>
@@ -47,6 +47,10 @@ const double EPS = (1e-7);
 
 void solve() {
 
+    int n;cin>>n;
+    vector<int> a(n);cin>>a;
+    sort(rall(a));
+    cout<<a;
 
     
 }

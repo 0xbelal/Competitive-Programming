@@ -1,8 +1,3 @@
-/* Deliberate practice > blind repetition */
-// Author: Belal
-// URL: 
-
-
 #include<set>
 #include<map>
 #include<list>
@@ -47,7 +42,16 @@ const double EPS = (1e-7);
 
 void solve() {
 
-
+    map<int,string> ans={
+        {1,"Easy"},
+        {2,"Easy+"},
+        {3,"Mid"},
+        {4,"Mid+"},
+        {5,"Hard"},
+        {6,"Hard+"}
+    };
+    int x;cin>>x;
+    cout<<ans[x];
     
 }
 

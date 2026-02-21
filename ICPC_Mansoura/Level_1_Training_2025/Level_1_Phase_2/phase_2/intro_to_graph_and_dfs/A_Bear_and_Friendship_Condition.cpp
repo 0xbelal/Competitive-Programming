@@ -1,6 +1,6 @@
 /* Deliberate practice > blind repetition */
 // Author: Belal
-// URL: 
+// URL: https://codeforces.com/problemset/problem/771/A
 
 
 #include<set>
@@ -44,10 +44,36 @@ using ld = long double;
 
 const double EPS = (1e-7);
 
+const int N = 150123;
+vector<int> edges[N];
+bool vis[N];
+int n,m;
+ 
+void dfs(int a, int & cnt_vertices, int & cnt_edges) {
+
+	vis[a] = true;
+	++cnt_vertices;
+	cnt_edges += edges[a].size();
+	for(int b : edges[a])
+		if(!vis[b]) dfs(b, cnt_vertices, cnt_edges);
+}
 
 void solve() {
 
+    cin>>n>>m;
 
+    while(m--) {
+		int a,b;cin>>a>>b;
+        edges[a].push_back(b);
+		edges[b].push_back(a);
+	}
+	for(int i=1;i<=n;++i)
+		if(!vis[i]) {
+			int cnt_vertices=0,cnt_edges=0;
+			dfs(i,cnt_vertices,cnt_edges);
+			if(cnt_edges != (ll)cnt_vertices*(cnt_vertices-1)) {cout<<"NO";return;}
+		}
+    cout<<"YES";
     
 }
 

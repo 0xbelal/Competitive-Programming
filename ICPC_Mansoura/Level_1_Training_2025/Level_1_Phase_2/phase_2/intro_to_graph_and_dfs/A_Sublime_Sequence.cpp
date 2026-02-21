@@ -1,6 +1,6 @@
 /* Deliberate practice > blind repetition */
 // Author: Belal
-// URL: 
+// URL: https://codeforces.com/group/9g2gEGktp4/contest/668256/problem/A
 
 
 #include<set>
@@ -47,16 +47,16 @@ const double EPS = (1e-7);
 
 void solve() {
 
-
+    int x,n;cin>>x>>n;
+    if(n&1) cout<<x<<"\n";
+    else cout<<0<<"\n";
     
 }
 
 int main() {
     fast_io;
 
-    int t = 1;
-
-    // cin >> t;
+    int t = 1;cin>>t;
     while (t--) {
         solve();
     }

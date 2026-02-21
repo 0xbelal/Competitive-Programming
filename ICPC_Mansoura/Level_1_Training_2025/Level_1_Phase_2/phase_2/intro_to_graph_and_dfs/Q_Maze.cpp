@@ -1,8 +1,3 @@
-/* Deliberate practice > blind repetition */
-// Author: Belal
-// URL: 
-
-
 #include<set>
 #include<map>
 #include<list>
