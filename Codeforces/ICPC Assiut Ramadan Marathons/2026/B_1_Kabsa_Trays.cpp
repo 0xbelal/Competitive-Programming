@@ -1,6 +1,6 @@
 /* Deliberate practice > blind repetition */
 // Author: Belal
-// URL: https://codeforces.com/contest/2200/problem/A
+// URL: https://codeforces.com/group/MEqF8b6wBT/contest/673206/problem/B1
 
 
 #include<set>
@@ -44,20 +44,22 @@ using ld = long double;
 
 const double EPS = (1e-7);
 
+
 void solve() {
 
-    int n,ans=0;cin>>n;
-    vector<int> a(n+1);
+    int n;cin>>n;
+    bool found = false;
+    for (int i=1;i*7<=n;i++) {
+        int remaining=n -(i*7);
+        if (remaining>0&& remaining%4==0) {
+            found = true;
+            break; 
+        }
+    }
 
-    for(int i=0;i<n;i++){
-        cin>>a[i]; 
-        if(a[ans] <a[i]) ans =i;
-    }
-    int cnt=0;
-   for(int i=0;i<n;i++){
-        if(a[i]==a[ans]) cnt++;
-    }
-    cout<<cnt<<"\n";
+    if (!found) {
+        cout << "NO" << endl;
+    }else cout<<"YES\n";    
 }
 
 int main() {
@@ -65,7 +67,7 @@ int main() {
 
     int t = 1;
 
-    cin>>t;
+    cin >> t;
     while (t--) {
         solve();
     }
