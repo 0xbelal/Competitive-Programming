@@ -1,0 +1,1 @@
+{"name":"Local: problem","url":"/home/belal/data/Computer Science/CP/problem.cpp","tests":[{"id":1772797600682,"input":"9\n1 8 6 2 5 4 8 3 7","output":"49\n"},{"id":1772798067503,"input":"10\n1 2 10 2 8 9 10 1 1 10","output":"70"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"/home/belal/data/Computer Science/CP/problem.cpp","group":"local","local":true}
