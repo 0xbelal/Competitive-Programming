@@ -1,6 +1,6 @@
 /* Deliberate practice > blind repetition */
 // Author: Belal
-// URL: https://codeforces.com/group/MEqF8b6wBT/contest/673206/problem/B6
+// URL: https://codeforces.com/group/reRlOrZJrU/contest/676893/problem/C1
 
 
 #include<set>
@@ -43,41 +43,13 @@ using ld = long double;
 #define ss second
 
 const double EPS = (1e-7);
-const ll p=998244353,mod=1e9+7;
+
+
 void solve() {
 
-    ll n,k;cin>>n>>k;
-    vector<int> v;
-    v.reserve(n*100);
-
-    for(int i=0;i<n;i++){
-        ll ai;cin>>ai;
-        ai%=mod;
-        for(int j=1;j<=100;j++){
-            ll temp = (int)((ai+ 1LL*(j*p))%mod);
-            v.push_back((int)temp);
-        }
-    }
-       
-    sort(all(v));
-    v.erase(unique(all(v)), v.end());
-
-    ll current_missing = 0;
-    ll last_val = -1; 
-    
-    for (int x : v) {
-        int gap = x-last_val - 1;
-        if (gap > 0) {
-            if (current_missing + gap >= k) {
-                cout << (ll)last_val + (k - current_missing) << "\n";
-                return;
-            }
-            current_missing += gap;
-        }
-        last_val = x;
-    }
-    cout << (ll)last_val + (k - current_missing) << "\n";
-
+    int n;cin>>n;
+    string s;cin>>s;
+    cout<<"YES";
 }
 
 int main() {
