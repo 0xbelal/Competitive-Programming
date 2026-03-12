@@ -1,9 +1,8 @@
 /* Deliberate practice > blind repetition */
 // Author: Belal
-// URL: https://codeforces.com/group/MEqF8b6wBT/contest/673206/problem/B4
+// URL: https://codeforces.com/group/MEqF8b6wBT/contest/673206/problem/C2
 
-#include <cstdio>
-#include <cstring>
+
 #include<set>
 #include<map>
 #include<list>
@@ -19,7 +18,6 @@
 #include<fstream>
 #include<algorithm>
 #include<assert.h>
-
 using namespace std;
 
 
@@ -45,23 +43,58 @@ using ld = long double;
 
 const double EPS = (1e-7);
 
+
 void solve() {
-    
-    string password = "000";
-    int base = ask(password);
-    for (int i = 1; i <= 9; i++) {
-        password[0] = i + '0';
-        int current = ask(password);
-        if (current > base) break;
-        if (current < base) {     
-            password[0] = '0';
-            break;
-        }
+
+    int n;cin>>n;
+    map<int,int> a;
+    for(int i = 1;i <= n; i++){
+        int x;cin>>x;
+        a[x] = i;
     }
 
+    set<int> holes;
+    holes.insert(a[1]);
+    int cost=0;
+    for(int i = 2; i <= n; i++){
+        int source = i-1, destination = i;
+
+        auto it = holes.lower_bound(a[destination]);
+        int min_cost = __INT_MAX__;
+        if(it != holes.end()){
+          min_cost = min (min_cost,abs (a[destination] - *it) );
+        }
+        if(it != holes.begin()){
+          min_cost = min (min_cost,abs (a[destination] - *prev(it)) );
+        }
+
+        cost += min_cost;
+        holes.insert(a[destination]);
+
+        // int l = 1,r = n;
+        // int mid=0, min_cost = actual_cost;
+        // while(l <= r){
+        //     mid = l + (r - l)/2;
+        //     if(blocks[mid] == true){
+        //         min_cost = min(min_cost, abs(a[destination] - a[mid]));
+        //     }
+        //     if(mid < a[destination]){
+        //         l = mid + 1;
+        //     }else{
+        //         r = mid - 1;
+        //     }
+        // }
+        // cost += min_cost;
+        // blocks[destination] = true;
+    }
+
+    cout << cost;
+
+
 }
+
 int main() {
-    // fast_io;
+    fast_io;
 
     int t = 1;
 

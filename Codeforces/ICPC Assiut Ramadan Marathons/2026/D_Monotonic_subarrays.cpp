@@ -1,9 +1,8 @@
 /* Deliberate practice > blind repetition */
 // Author: Belal
-// URL: https://codeforces.com/group/MEqF8b6wBT/contest/673206/problem/B4
+// URL: https://codeforces.com/group/reRlOrZJrU/contest/676893/problem/D
 
-#include <cstdio>
-#include <cstring>
+
 #include<set>
 #include<map>
 #include<list>
@@ -45,23 +44,56 @@ using ld = long double;
 
 const double EPS = (1e-7);
 
-void solve() {
-    
-    string password = "000";
-    int base = ask(password);
-    for (int i = 1; i <= 9; i++) {
-        password[0] = i + '0';
-        int current = ask(password);
-        if (current > base) break;
-        if (current < base) {     
-            password[0] = '0';
-            break;
-        }
+template<class T>
+template<class T>
+struct SparseTable {
+    static const int B = 21;
+
+    vector<array<T,B>> t;
+    vector<int> lg;
+
+    SparseTable(int n , vector<T> &v): t(n), lg(n+1){
+
+        for(int i=2;i<=n;i++)
+            lg[i] = lg[i/2] + 1;
+
+        for(int i=0;i<n;i++)
+            t[i][0] = v[i];
+
+        for(int j=1;j<B;j++)
+            for(int i=0;i+(1<<j)<=n;i++)
+                t[i][j] = merge(
+                    t[i][j-1],
+                    t[i + (1<<(j-1))][j-1]
+                );
     }
 
+    T merge(const T& l,const T& r){
+        return __gcd(l,r);
+    }
+
+    T query(int l,int r){
+        int j = lg[r-l+1];
+        return merge(
+            t[l][j],
+            t[r-(1<<j)+1][j]
+        );
+    }
+};
+void solve() {
+
+    int n;cin>>n;
+    vector<int> a(n);cin>>a;
+    
+    while(q--){
+        int x;cin>>x;   
+    }
+    cout<<pre<<endl<<suff;
+
 }
+
 int main() {
-    // fast_io;
+    fast_io;
 
     int t = 1;
 

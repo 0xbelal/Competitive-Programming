@@ -44,16 +44,10 @@ using ld = long double;
 
 const double EPS = (1e-7);
 
-int factorial(int n)
-{
-    return (n==1 || n==0) ? 1: n * factorial(n - 1); 
-}
 void solve() {
-
     int n;cin>>n;
-                      
+    cout<<n<<"\n";    
 }
-
 int main() {
     fast_io;
 
