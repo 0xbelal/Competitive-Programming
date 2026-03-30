@@ -1,6 +1,6 @@
 /* Deliberate practice > blind repetition */
 // Author: Belal
-// URL: https://codeforces.com/contest/2200/problem/D
+// URL: https://codeforces.com/contest/2204/problem/C
 
 
 #include<set>
@@ -18,7 +18,7 @@
 #include<fstream>
 #include<algorithm>
 #include<assert.h>
-
+#include <numeric>
 using namespace std;
 
 
@@ -44,29 +44,63 @@ using ld = long double;
 
 const double EPS = (1e-7);
 
+ /*  a = 3 + 3 + 2 + 3 + 3 = 1
+        1     b 
+        2  a  b
+        3     b  c
+        4  a  b 
+        5     b
+        6  a  b  c
+        7     b  
+        8  a  b
+        9     b  c
+        10 a  b  
+*/ 
+/*
 
+    a + 2a + 3a + ... = x * a = y * b = z
+    z = y * b >> b  = z/y
+    x = z/a
+    x = y*b/a
+
+    a, b, c, m = 2 4 5  16
+        1  
+        2   a
+        3  
+        4   a  b
+        5         c
+        6   a
+        7    
+        8   a  b
+        9  
+        10  a     c
+        11
+        12  a  b
+        13
+        14  a
+        15        c
+        16  a  b
+*/
+
+ll LCM(ll a, ll b){
+    return (a / std::gcd(a,b)) * b;
+}
 void solve() {
-    int n, x, y;
-    cin >> n >> x >> y;
-    x--;y--;
 
-    vector<int> a,b;
-    for(int i = 0; i < n; i++){
-        int z;cin >> z;
-        if(i <= x || i > y) a.push_back(z);
-        else b.push_back(z);
-    }
+    ll a,b,c,m; cin >> a >> b >> c >> m;
+    ll aa = m/a, bb = m/b, cc = m/c;
+    
+    ll abc = (m / LCM(a,LCM(b,c)));
+    ll ab  = (m / LCM(a,b)) - abc;
+    ll ac  = (m / LCM(a,c)) - abc;
+    ll bc  = (m / LCM(b,c)) - abc;
+    
+    ll aans = 6*(aa - (abc + ab + ac)) + 3*ab + 3*ac + 2*abc;
+    ll bans = 6*(bb - (abc + ab + bc)) + 3*ab + 3*bc + 2*abc;
+    ll cans = 6*(cc - (abc + bc + ac)) + 3*bc + 3*ac + 2*abc;
 
-    // auto min_b = 
-    if(!b.empty()){
-        rotate(b.begin(),min_element(all(b)),b.end());
-    } 
-    int m= (b.empty()? -1 : b[0]);
-    auto it=a.begin();
-    while (it!=a.end() && *it<m)it++;
-    a.insert(it,all(b));
-    cout<<a<<"\n";
- 
+    cout << aans << " " << bans << " " << cans << "\n"; 
+
 }
 
 int main() {

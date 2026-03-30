@@ -1,6 +1,6 @@
 /* Deliberate practice > blind repetition */
 // Author: Belal
-// URL: https://codeforces.com/contest/2200/problem/D
+// URL: 
 
 
 #include<set>
@@ -46,29 +46,32 @@ const double EPS = (1e-7);
 
 
 void solve() {
-    int n, x, y;
-    cin >> n >> x >> y;
-    x--;y--;
-
-    vector<int> a,b;
-    for(int i = 0; i < n; i++){
-        int z;cin >> z;
-        if(i <= x || i > y) a.push_back(z);
-        else b.push_back(z);
+    int n; cin >> n;
+    for (int i = 1; i <= 2*n - 3; i += 2) {
+        cout << "? " << i << " " << i+1 << "\n";
+        cout.flush();
+        int res; cin >> res;
+        if (res == -1) exit(0);
+        if (res == 1) {
+            cout << "! " << i << "\n";
+            cout.flush();
+            return;
+        }
     }
+    int L = 2*n - 1;
+    cout << "? 1 " << L << "\n"; cout.flush();
+    int r1; cin >> r1;
+    if (r1 == -1) exit(0);
+    if (r1 == 1) { cout << "! 1\n"; cout.flush(); return; }
 
-    // auto min_b = 
-    if(!b.empty()){
-        rotate(b.begin(),min_element(all(b)),b.end());
-    } 
-    int m= (b.empty()? -1 : b[0]);
-    auto it=a.begin();
-    while (it!=a.end() && *it<m)it++;
-    a.insert(it,all(b));
-    cout<<a<<"\n";
- 
+    cout << "? 2 " << L << "\n"; cout.flush();
+    int r2; cin >> r2;
+    if (r2 == -1) exit(0);
+    if (r2 == 1) { cout << "! 2\n"; cout.flush(); return; }
+
+    cout << "! " << 2*n << "\n";
+    cout.flush();
 }
-
 int main() {
     fast_io;
 

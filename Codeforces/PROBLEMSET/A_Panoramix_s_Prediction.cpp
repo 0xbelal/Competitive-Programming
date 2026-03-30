@@ -1,6 +1,6 @@
 /* Deliberate practice > blind repetition */
 // Author: Belal
-// URL: https://codeforces.com/contest/2200/problem/D
+// URL: https://codeforces.com/contest/80/problem/A
 
 
 #include<set>
@@ -46,27 +46,32 @@ const double EPS = (1e-7);
 
 
 void solve() {
-    int n, x, y;
-    cin >> n >> x >> y;
-    x--;y--;
 
-    vector<int> a,b;
-    for(int i = 0; i < n; i++){
-        int z;cin >> z;
-        if(i <= x || i > y) a.push_back(z);
-        else b.push_back(z);
+    int n,m;cin>>n>>m;
+    bool ans = true;
+
+    auto isPrime = [](int x) -> bool {
+        if (x < 2) return false;
+        if (x == 2) return true;
+        if (x % 2 == 0) return false;    
+        if (x == 3) return true;
+        if (x % 3 == 0) return false;    
+
+    
+        for (int i = 5; (long long)i * i <= x; i += 6) {
+            if (x % i == 0 || x % (i + 2) == 0) return false;
+        }
+        return true;
+    };
+    
+    if(!isPrime(m)){ cout<<"NO"; return; }
+    for(int i = n+1; i <= m ;i++){
+        if(isPrime(i) && i != m){
+            cout<<"NO";
+            return;
+        }
     }
-
-    // auto min_b = 
-    if(!b.empty()){
-        rotate(b.begin(),min_element(all(b)),b.end());
-    } 
-    int m= (b.empty()? -1 : b[0]);
-    auto it=a.begin();
-    while (it!=a.end() && *it<m)it++;
-    a.insert(it,all(b));
-    cout<<a<<"\n";
- 
+    cout<<"YES"; 
 }
 
 int main() {
@@ -74,7 +79,7 @@ int main() {
 
     int t = 1;
 
-    cin >> t;
+    // cin >> t;
     while (t--) {
         solve();
     }

@@ -1,6 +1,6 @@
 /* Deliberate practice > blind repetition */
 // Author: Belal
-// URL: https://codeforces.com/contest/2200/problem/D
+// URL: https://codeforces.com/problemset/problem/577/B
 
 
 #include<set>
@@ -18,7 +18,7 @@
 #include<fstream>
 #include<algorithm>
 #include<assert.h>
-
+#include <bitset>
 using namespace std;
 
 
@@ -44,29 +44,23 @@ using ld = long double;
 
 const double EPS = (1e-7);
 
-
 void solve() {
-    int n, x, y;
-    cin >> n >> x >> y;
-    x--;y--;
-
-    vector<int> a,b;
-    for(int i = 0; i < n; i++){
-        int z;cin >> z;
-        if(i <= x || i > y) a.push_back(z);
-        else b.push_back(z);
+    int n, m; cin >> n >> m;
+    vector<int> a(n); cin >> a;
+    if (n >= m) { cout << "YES\n"; return; }
+    vector<bool> dp(m, false);
+    for (int i = 0; i < n; i++) {
+        int x = a[i] % m;
+        vector<bool> next = dp;
+        next[x] = true;
+        for (int j = 0; j < m; j++)
+            if (dp[j]) next[(j + x) % m] = true;
+        
+        dp = next;
+        if (dp[0]) { cout << "YES\n"; return; }
     }
 
-    // auto min_b = 
-    if(!b.empty()){
-        rotate(b.begin(),min_element(all(b)),b.end());
-    } 
-    int m= (b.empty()? -1 : b[0]);
-    auto it=a.begin();
-    while (it!=a.end() && *it<m)it++;
-    a.insert(it,all(b));
-    cout<<a<<"\n";
- 
+    cout << "NO\n";
 }
 
 int main() {
@@ -74,7 +68,7 @@ int main() {
 
     int t = 1;
 
-    cin >> t;
+    // cin >> t;
     while (t--) {
         solve();
     }

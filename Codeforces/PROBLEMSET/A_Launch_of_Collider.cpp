@@ -1,6 +1,6 @@
 /* Deliberate practice > blind repetition */
 // Author: Belal
-// URL: https://codeforces.com/contest/2200/problem/D
+// URL: https://codeforces.com/contest/699/problem/A
 
 
 #include<set>
@@ -46,27 +46,33 @@ const double EPS = (1e-7);
 
 
 void solve() {
-    int n, x, y;
-    cin >> n >> x >> y;
-    x--;y--;
 
-    vector<int> a,b;
+    int n; cin >> n; 
+    vector<char> dir(n); cin >> dir;
+    vector<int> coor(n); cin >> coor;
+    if(n == 1) {cout << "-1"; return;}
+    int r_idx = -1, l_idx = -1;
+    int ans = __INT_MAX__;
+    bool found = false;
     for(int i = 0; i < n; i++){
-        int z;cin >> z;
-        if(i <= x || i > y) a.push_back(z);
-        else b.push_back(z);
+        if(dir[i] == 'R'){
+            r_idx = i;
+            found = true;
+        }else{
+            if(!found) continue;
+            l_idx = i;  
+            ans = min(ans, (coor[l_idx] - coor[r_idx] ) / 2);
+            found = false;
+        }
     }
 
-    // auto min_b = 
-    if(!b.empty()){
-        rotate(b.begin(),min_element(all(b)),b.end());
-    } 
-    int m= (b.empty()? -1 : b[0]);
-    auto it=a.begin();
-    while (it!=a.end() && *it<m)it++;
-    a.insert(it,all(b));
-    cout<<a<<"\n";
- 
+    if(r_idx == -1 || l_idx == -1){cout << "-1"; return;}
+    cout << ans;
+    /*
+        1  2  3  4  5  6  7  8  9  10 
+           ^     ^     ^            ^
+           R     L     R            L   
+    */    
 }
 
 int main() {
@@ -74,7 +80,7 @@ int main() {
 
     int t = 1;
 
-    cin >> t;
+    // cin >> t;
     while (t--) {
         solve();
     }

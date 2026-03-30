@@ -1,6 +1,6 @@
 /* Deliberate practice > blind repetition */
 // Author: Belal
-// URL: https://codeforces.com/contest/2200/problem/D
+// URL: 
 
 
 #include<set>
@@ -44,29 +44,21 @@ using ld = long double;
 
 const double EPS = (1e-7);
 
-
 void solve() {
-    int n, x, y;
-    cin >> n >> x >> y;
-    x--;y--;
-
-    vector<int> a,b;
+    int n;    cin >> n; 
+    vector<ll> a(n); cin >> a;
+    vector<int> ans(n);
     for(int i = 0; i < n; i++){
-        int z;cin >> z;
-        if(i <= x || i > y) a.push_back(z);
-        else b.push_back(z);
+        int mx = 0;
+        int mn = 0;
+        for(int j = i + 1; j < n; j++){
+            if((a[i]) > (a[j])) mx++;
+            else if (a[i] < a[j])mn++;
+        }
+        ans[i] = max(mx, mn);
     }
-
-    // auto min_b = 
-    if(!b.empty()){
-        rotate(b.begin(),min_element(all(b)),b.end());
-    } 
-    int m= (b.empty()? -1 : b[0]);
-    auto it=a.begin();
-    while (it!=a.end() && *it<m)it++;
-    a.insert(it,all(b));
-    cout<<a<<"\n";
- 
+    cout << ans << "\n";
+    
 }
 
 int main() {

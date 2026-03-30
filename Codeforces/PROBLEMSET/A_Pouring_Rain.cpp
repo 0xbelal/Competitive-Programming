@@ -1,13 +1,12 @@
 /* Deliberate practice > blind repetition */
 // Author: Belal
-// URL: https://codeforces.com/contest/2200/problem/D
+// URL:  https://codeforces.com/contest/667/problem/A
 
 
 #include<set>
 #include<map>
 #include<list>
 #include<iomanip>
-#include<cmath>
 #include<string>
 #include<vector>
 #include<queue>
@@ -43,30 +42,17 @@ using ld = long double;
 #define ss second
 
 const double EPS = (1e-7);
-
-
+# define M_PI           3.14159265358979323846 
 void solve() {
-    int n, x, y;
-    cin >> n >> x >> y;
-    x--;y--;
 
-    vector<int> a,b;
-    for(int i = 0; i < n; i++){
-        int z;cin >> z;
-        if(i <= x || i > y) a.push_back(z);
-        else b.push_back(z);
-    }
+    double d,h,v,e;cin>>d>>h>>v>>e;
+    
+    double area =  M_PI * (d*d)/4;
+    double delta = e - v / area;
 
-    // auto min_b = 
-    if(!b.empty()){
-        rotate(b.begin(),min_element(all(b)),b.end());
-    } 
-    int m= (b.empty()? -1 : b[0]);
-    auto it=a.begin();
-    while (it!=a.end() && *it<m)it++;
-    a.insert(it,all(b));
-    cout<<a<<"\n";
- 
+    if(delta >= 0){ cout<<"NO"; return; }
+    double time = h / (-1*delta);
+    cout<<"YES\n"<< fixed << setprecision(12) << time;
 }
 
 int main() {
@@ -74,7 +60,7 @@ int main() {
 
     int t = 1;
 
-    cin >> t;
+    // cin >> t;
     while (t--) {
         solve();
     }

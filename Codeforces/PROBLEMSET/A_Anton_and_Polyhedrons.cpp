@@ -1,6 +1,6 @@
 /* Deliberate practice > blind repetition */
 // Author: Belal
-// URL: https://codeforces.com/contest/2200/problem/D
+// URL: https://codeforces.com/contest/785/problem/A
 
 
 #include<set>
@@ -46,27 +46,21 @@ const double EPS = (1e-7);
 
 
 void solve() {
-    int n, x, y;
-    cin >> n >> x >> y;
-    x--;y--;
 
-    vector<int> a,b;
-    for(int i = 0; i < n; i++){
-        int z;cin >> z;
-        if(i <= x || i > y) a.push_back(z);
-        else b.push_back(z);
+    int n;cin>>n;
+    map<string,int> m={
+        {"Tetrahedron",4},
+        {"Cube",6},
+        {"Octahedron",8},
+        {"Dodecahedron",12},
+        {"Icosahedron",20},
+    };
+    int ans=0,i=0;
+    lp(i,n){
+        string s;cin>>s;
+        ans += m[s];
     }
-
-    // auto min_b = 
-    if(!b.empty()){
-        rotate(b.begin(),min_element(all(b)),b.end());
-    } 
-    int m= (b.empty()? -1 : b[0]);
-    auto it=a.begin();
-    while (it!=a.end() && *it<m)it++;
-    a.insert(it,all(b));
-    cout<<a<<"\n";
- 
+    cout<<ans;
 }
 
 int main() {
@@ -74,7 +68,7 @@ int main() {
 
     int t = 1;
 
-    cin >> t;
+    // cin >> t;
     while (t--) {
         solve();
     }

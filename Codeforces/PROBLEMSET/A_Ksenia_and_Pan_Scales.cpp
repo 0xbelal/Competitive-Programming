@@ -1,6 +1,6 @@
 /* Deliberate practice > blind repetition */
 // Author: Belal
-// URL: https://codeforces.com/contest/2200/problem/D
+// URL: https://codeforces.com/contest/382/problem/A
 
 
 #include<set>
@@ -46,27 +46,36 @@ const double EPS = (1e-7);
 
 
 void solve() {
-    int n, x, y;
-    cin >> n >> x >> y;
-    x--;y--;
 
-    vector<int> a,b;
-    for(int i = 0; i < n; i++){
-        int z;cin >> z;
-        if(i <= x || i > y) a.push_back(z);
-        else b.push_back(z);
+    string curr,un; cin >> curr >> un;
+    int didx = curr.find('|') ;
+    string left = curr.substr(0,didx);
+    string right = curr.substr(didx + 1 , curr.size());
+    int equ = abs (int((left.length() - right.length())));
+    if((right.size() + un.size() + left.size()) & 1
+        || un.size() < equ) { cout << "Impossible"; return; }
+    else{
+        
+        if(left.size() < right.size()){
+            for(int i = 0;i < equ; i++){
+                left.push_back(un[i]);
+            }
+        }else if (left.size() > right.size()){
+            for(int i = 0;i < equ; i++){
+                right.push_back(un[i]);
+            }
+        }
+
+        for(int i = equ; i < un.size(); i+=2){    
+            left.push_back(un[i]);
+            right.push_back(un[i+1]);
+        }
     }
+    
+    cout << left << "|" << right;
+    
 
-    // auto min_b = 
-    if(!b.empty()){
-        rotate(b.begin(),min_element(all(b)),b.end());
-    } 
-    int m= (b.empty()? -1 : b[0]);
-    auto it=a.begin();
-    while (it!=a.end() && *it<m)it++;
-    a.insert(it,all(b));
-    cout<<a<<"\n";
- 
+    
 }
 
 int main() {
@@ -74,7 +83,7 @@ int main() {
 
     int t = 1;
 
-    cin >> t;
+    // cin >> t;
     while (t--) {
         solve();
     }

@@ -1,6 +1,6 @@
 /* Deliberate practice > blind repetition */
 // Author: Belal
-// URL: https://codeforces.com/contest/2200/problem/D
+// URL: https://codeforces.com/contest/1237/problem/A
 
 
 #include<set>
@@ -46,35 +46,46 @@ const double EPS = (1e-7);
 
 
 void solve() {
-    int n, x, y;
-    cin >> n >> x >> y;
-    x--;y--;
 
-    vector<int> a,b;
-    for(int i = 0; i < n; i++){
-        int z;cin >> z;
-        if(i <= x || i > y) a.push_back(z);
-        else b.push_back(z);
+    int n; cin >> n;
+    vector<int> a(n),b(n);
+    ll pos_sum = 0, neg_sum = 0;
+    for (int i = 0; i < n; i++){
+        int x; cin >> x;
+        a[i] = x;
+        x /= 2;
+        if(x < 0) neg_sum += x; 
+        if(x > 0) pos_sum += x; 
+        b[i] = x;
     }
 
-    // auto min_b = 
-    if(!b.empty()){
-        rotate(b.begin(),min_element(all(b)),b.end());
-    } 
-    int m= (b.empty()? -1 : b[0]);
-    auto it=a.begin();
-    while (it!=a.end() && *it<m)it++;
-    a.insert(it,all(b));
-    cout<<a<<"\n";
- 
+    int gap = pos_sum + neg_sum;
+    if(gap > 0){
+        for(int i = 0;gap > 0 && i < n; i++){
+            if(a[i] < 0 && abs(a[i]) & 1) {
+                b[i] -= 1;
+                gap--;
+            }
+        }
+    }else if(gap < 0){
+        gap *= -1;
+        for(int i = 0;gap > 0 && i < n; i++){
+            if(a[i] > 0 && abs(a[i]) & 1) {
+                b[i] += 1;
+                gap--;
+            }
+        }
+    }
+    
+    for(int x : b) cout << x << "\n";
+    
 }
-
 int main() {
     fast_io;
 
     int t = 1;
 
-    cin >> t;
+    // cin >> t;
     while (t--) {
         solve();
     }

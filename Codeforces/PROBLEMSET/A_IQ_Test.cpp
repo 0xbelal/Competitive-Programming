@@ -1,6 +1,6 @@
 /* Deliberate practice > blind repetition */
 // Author: Belal
-// URL: https://codeforces.com/contest/2200/problem/D
+// URL: https://codeforces.com/problemset/problem/287/A
 
 
 #include<set>
@@ -46,27 +46,21 @@ const double EPS = (1e-7);
 
 
 void solve() {
-    int n, x, y;
-    cin >> n >> x >> y;
-    x--;y--;
-
-    vector<int> a,b;
-    for(int i = 0; i < n; i++){
-        int z;cin >> z;
-        if(i <= x || i > y) a.push_back(z);
-        else b.push_back(z);
+    char grid[4][4];
+    for(int i = 0; i < 4; i++)
+        for(int j = 0; j < 4; j++) cin >> grid[i][j];
+    
+    for(int i = 0; i < 3; i++) {
+        for(int j = 0; j < 3; j++){
+            char curr = grid[i][j];
+            if((grid[i][j] != grid[i][j+1] && grid[i+1][j] == grid[i+1][j+1]) 
+                || ( grid[i][j+1] == curr && grid[i+1][j] == curr && grid[i+1][j+1] == curr) ){
+                cout << "YES\n";
+                return;
+            }
+        }
     }
-
-    // auto min_b = 
-    if(!b.empty()){
-        rotate(b.begin(),min_element(all(b)),b.end());
-    } 
-    int m= (b.empty()? -1 : b[0]);
-    auto it=a.begin();
-    while (it!=a.end() && *it<m)it++;
-    a.insert(it,all(b));
-    cout<<a<<"\n";
- 
+    cout << "NO\n";
 }
 
 int main() {
@@ -74,7 +68,7 @@ int main() {
 
     int t = 1;
 
-    cin >> t;
+    // cin >> t;
     while (t--) {
         solve();
     }

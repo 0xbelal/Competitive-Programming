@@ -1,6 +1,6 @@
 /* Deliberate practice > blind repetition */
 // Author: Belal
-// URL: https://codeforces.com/contest/2200/problem/D
+// URL: https://codeforces.com/contest/270/problem/A
 
 
 #include<set>
@@ -46,27 +46,15 @@ const double EPS = (1e-7);
 
 
 void solve() {
-    int n, x, y;
-    cin >> n >> x >> y;
-    x--;y--;
 
-    vector<int> a,b;
-    for(int i = 0; i < n; i++){
-        int z;cin >> z;
-        if(i <= x || i > y) a.push_back(z);
-        else b.push_back(z);
-    }
-
-    // auto min_b = 
-    if(!b.empty()){
-        rotate(b.begin(),min_element(all(b)),b.end());
-    } 
-    int m= (b.empty()? -1 : b[0]);
-    auto it=a.begin();
-    while (it!=a.end() && *it<m)it++;
-    a.insert(it,all(b));
-    cout<<a<<"\n";
- 
+    int theta; cin >> theta;
+    // O * n = (n * 180 - 360)
+    // O * n - 180 * n = -360  
+    // n(O - 180) = -360
+    // n =  360 / 180 - O 
+    
+    if(360 % (180 - theta) == 0) cout<<"YES\n";
+    else cout<< "NO\n";
 }
 
 int main() {

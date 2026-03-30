@@ -1,6 +1,6 @@
 /* Deliberate practice > blind repetition */
 // Author: Belal
-// URL: https://codeforces.com/contest/2200/problem/D
+// URL: https://codeforces.com/contest/2140/problem/C
 
 
 #include<set>
@@ -18,6 +18,8 @@
 #include<fstream>
 #include<algorithm>
 #include<assert.h>
+#include <climits>
+#include <array>
 
 using namespace std;
 
@@ -44,31 +46,33 @@ using ld = long double;
 
 const double EPS = (1e-7);
 
-
 void solve() {
-    int n, x, y;
-    cin >> n >> x >> y;
-    x--;y--;
+    int n; cin >> n;
+    vector<ll> a(n);
+    vector<ll> even, odd;
+    ll current_sum = 0;
 
-    vector<int> a,b;
-    for(int i = 0; i < n; i++){
-        int z;cin >> z;
-        if(i <= x || i > y) a.push_back(z);
-        else b.push_back(z);
+    for (int i = 0; i < n; i++) {
+        cin >> a[i];
+        if (i % 2 == 0) {
+            current_sum += a[i];
+            even.push_back(a[i]);
+        } else {
+            current_sum -= a[i];
+            odd.push_back(a[i]);
+        }
     }
 
-    // auto min_b = 
-    if(!b.empty()){
-        rotate(b.begin(),min_element(all(b)),b.end());
-    } 
-    int m= (b.empty()? -1 : b[0]);
-    auto it=a.begin();
-    while (it!=a.end() && *it<m)it++;
-    a.insert(it,all(b));
-    cout<<a<<"\n";
- 
-}
+    ll min_even = *min_element(all(even));
+    ll max_odd = *max_element(all(odd));
 
+    if (max_odd > min_even) {
+        ll gain = 2 * (max_odd ,max_odd - min_even);
+        cout << current_sum + gain << "\n";
+    } else {
+        cout << current_sum << "\n";
+    }
+}
 int main() {
     fast_io;
 

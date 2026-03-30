@@ -1,6 +1,6 @@
 /* Deliberate practice > blind repetition */
 // Author: Belal
-// URL: https://codeforces.com/contest/2200/problem/D
+// URL: https://codeforces.com/contest/165/problem/B
 
 
 #include<set>
@@ -44,37 +44,31 @@ using ld = long double;
 
 const double EPS = (1e-7);
 
-
-void solve() {
-    int n, x, y;
-    cin >> n >> x >> y;
-    x--;y--;
-
-    vector<int> a,b;
-    for(int i = 0; i < n; i++){
-        int z;cin >> z;
-        if(i <= x || i > y) a.push_back(z);
-        else b.push_back(z);
+ll calc(ll v, ll k) {
+    ll sum = 0;
+    while (v >= 1) {
+        sum += v;
+        v /= k;
     }
-
-    // auto min_b = 
-    if(!b.empty()){
-        rotate(b.begin(),min_element(all(b)),b.end());
-    } 
-    int m= (b.empty()? -1 : b[0]);
-    auto it=a.begin();
-    while (it!=a.end() && *it<m)it++;
-    a.insert(it,all(b));
-    cout<<a<<"\n";
- 
+    return sum;
 }
 
+void solve() {
+    ll n, k; cin >> n >> k;
+    ll l = 1, r = 1e9, mid, ans = -1;
+    while (l <= r) {
+        mid = l + (r - l) / 2;
+        if (calc(mid, k) >= n) { ans = mid; r = mid - 1; }
+        else  l = mid + 1;
+    }
+    cout << ans;
+}
 int main() {
     fast_io;
 
     int t = 1;
 
-    cin >> t;
+    // cin >> t;
     while (t--) {
         solve();
     }

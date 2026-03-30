@@ -1,6 +1,6 @@
 /* Deliberate practice > blind repetition */
 // Author: Belal
-// URL: https://codeforces.com/contest/2200/problem/D
+// URL: https://codeforces.com/contest/1294/problem/C
 
 
 #include<set>
@@ -44,29 +44,52 @@ using ld = long double;
 
 const double EPS = (1e-7);
 
-
-void solve() {
-    int n, x, y;
-    cin >> n >> x >> y;
-    x--;y--;
-
-    vector<int> a,b;
-    for(int i = 0; i < n; i++){
-        int z;cin >> z;
-        if(i <= x || i > y) a.push_back(z);
-        else b.push_back(z);
+vector<int> PrimeFactorization(int n) {   
+    vector<int> factors;
+    if (n < 2) {
+        return factors;
     }
 
-    // auto min_b = 
-    if(!b.empty()){
-        rotate(b.begin(),min_element(all(b)),b.end());
-    } 
-    int m= (b.empty()? -1 : b[0]);
-    auto it=a.begin();
-    while (it!=a.end() && *it<m)it++;
-    a.insert(it,all(b));
-    cout<<a<<"\n";
- 
+    int temp = n;
+
+    while (temp % 2 == 0) {
+        factors.push_back(2);
+        temp /= 2;
+    }
+    for (int i = 3; i * i <= temp; i += 2) {
+        while (temp % i == 0) {
+            factors.push_back(i);
+            temp /= i;
+        }
+    }
+
+    if (temp > 2) {
+        factors.push_back(temp);
+    }
+
+    return factors;
+}
+
+void solve() {
+
+    int n; cin >> n;
+    int a=0, b=0, c=0;
+    for (int i = 2; i * i <= n; ++i) 
+        if (n % i == 0) { a = i;break; }
+    if(a == 0) return void(cout << "NO\n");
+    
+    int rem = n / a;
+    for (int i = a + 1; i * i <= rem; ++i)
+        if (rem % i == 0) { b = i; break; }
+    if(b == 0) return void(cout << "NO\n");
+
+    c = rem / b;
+    if (c >= 2 && c != a && c != b){
+        cout << "YES\n" << a << " " << b << " " << c << "\n";
+        return;
+    }
+
+    cout << "NO\n";
 }
 
 int main() {

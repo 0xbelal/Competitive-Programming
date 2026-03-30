@@ -1,6 +1,6 @@
 /* Deliberate practice > blind repetition */
 // Author: Belal
-// URL: https://codeforces.com/contest/2200/problem/D
+// URL: https://codeforces.com/contest/296/problem/A
 
 
 #include<set>
@@ -46,27 +46,22 @@ const double EPS = (1e-7);
 
 
 void solve() {
-    int n, x, y;
-    cin >> n >> x >> y;
-    x--;y--;
 
-    vector<int> a,b;
-    for(int i = 0; i < n; i++){
-        int z;cin >> z;
-        if(i <= x || i > y) a.push_back(z);
-        else b.push_back(z);
+    int n; cin >> n;
+    if(n == 1) {cout << "YES"; return;}
+    vector<int> a(n); cin >> a;
+    sort(all(a));
+    int cnt_cont=1, mx_cont = 1;
+    for(int i = 1; i < n; i++){
+         if(a[i] == a[i-1]){
+            cnt_cont++;
+            mx_cont = max(cnt_cont, mx_cont);
+         }else cnt_cont = 1;
     }
 
-    // auto min_b = 
-    if(!b.empty()){
-        rotate(b.begin(),min_element(all(b)),b.end());
-    } 
-    int m= (b.empty()? -1 : b[0]);
-    auto it=a.begin();
-    while (it!=a.end() && *it<m)it++;
-    a.insert(it,all(b));
-    cout<<a<<"\n";
- 
+    if(mx_cont  <= (n+1)/2) cout << "YES";
+    else cout << "NO";
+    
 }
 
 int main() {
@@ -74,7 +69,7 @@ int main() {
 
     int t = 1;
 
-    cin >> t;
+    // cin >> t;
     while (t--) {
         solve();
     }

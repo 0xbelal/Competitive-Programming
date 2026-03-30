@@ -1,6 +1,6 @@
 /* Deliberate practice > blind repetition */
 // Author: Belal
-// URL: https://codeforces.com/contest/2200/problem/D
+// URL : https://codeforces.com/contest/515/problem/C 
 
 
 #include<set>
@@ -46,27 +46,22 @@ const double EPS = (1e-7);
 
 
 void solve() {
-    int n, x, y;
-    cin >> n >> x >> y;
-    x--;y--;
 
-    vector<int> a,b;
-    for(int i = 0; i < n; i++){
-        int z;cin >> z;
-        if(i <= x || i > y) a.push_back(z);
-        else b.push_back(z);
+    int n; cin >> n;
+
+    string sa,x = ""; cin >> sa;
+    for(char & c : sa){
+        if(c != '1' && c != '0') x += c ;
     }
 
-    // auto min_b = 
-    if(!b.empty()){
-        rotate(b.begin(),min_element(all(b)),b.end());
-    } 
-    int m= (b.empty()? -1 : b[0]);
-    auto it=a.begin();
-    while (it!=a.end() && *it<m)it++;
-    a.insert(it,all(b));
-    cout<<a<<"\n";
- 
+    string ans = "";
+    map<int,string> mp ={ {2,"2"}, {3,"3"}, {4,"322"}, {5,"5"}, {6,"53"}, {7,"7"}, {8,"7222"}, {9,"7332"} };
+
+    for(char & c : x){
+        ans += mp[c - '0'];
+    }
+    sort(rall(ans));
+    cout << ans;
 }
 
 int main() {
@@ -74,7 +69,7 @@ int main() {
 
     int t = 1;
 
-    cin >> t;
+    // cin >> t;
     while (t--) {
         solve();
     }

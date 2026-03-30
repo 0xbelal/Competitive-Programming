@@ -1,6 +1,6 @@
 /* Deliberate practice > blind repetition */
 // Author: Belal
-// URL: https://codeforces.com/contest/2200/problem/D
+// URL: https://codeforces.com/contest/298/problem/A
 
 
 #include<set>
@@ -27,7 +27,6 @@ template<typename T> istream& operator>>(istream& is, vector<T>& v) { for (auto&
 
 #define fast_io ios::sync_with_stdio(false); cin.tie(nullptr);
 
-using ll = long long;
 using ull = unsigned long long;
 using ld = long double;
 
@@ -44,29 +43,32 @@ using ld = long double;
 
 const double EPS = (1e-7);
 
-
 void solve() {
-    int n, x, y;
-    cin >> n >> x >> y;
-    x--;y--;
+    int n; cin >> n;
+    string s; cin >> s;
+    int fl = -1, ll = -1, fr = -1, lr = -1;
 
-    vector<int> a,b;
     for(int i = 0; i < n; i++){
-        int z;cin >> z;
-        if(i <= x || i > y) a.push_back(z);
-        else b.push_back(z);
+        if (s[i] == 'R'){
+            if(fr == -1) fr = i + 1;
+            lr = i + 1; 
+        }
+        if (s[i] == 'L'){
+            if(fl == -1) fl = i + 1;
+            ll = i + 1;
+        }
     }
 
-    // auto min_b = 
-    if(!b.empty()){
-        rotate(b.begin(),min_element(all(b)),b.end());
-    } 
-    int m= (b.empty()? -1 : b[0]);
-    auto it=a.begin();
-    while (it!=a.end() && *it<m)it++;
-    a.insert(it,all(b));
-    cout<<a<<"\n";
- 
+    if (fl == -1) {
+        cout << fr << " " << lr + 1 << endl;
+    } else if (fr == -1) {
+        
+        cout << ll << " " << fl - 1 << endl;
+    } else {
+        // Both exist
+        // Alice moved through the R's and stopped at the start of the L's
+        cout << fr << " " << fl << endl;
+    }   
 }
 
 int main() {
@@ -74,7 +76,7 @@ int main() {
 
     int t = 1;
 
-    cin >> t;
+    // cin >> t;
     while (t--) {
         solve();
     }

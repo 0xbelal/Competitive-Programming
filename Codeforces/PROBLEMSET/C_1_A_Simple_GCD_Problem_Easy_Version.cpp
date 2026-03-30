@@ -1,6 +1,6 @@
 /* Deliberate practice > blind repetition */
 // Author: Belal
-// URL: https://codeforces.com/contest/2200/problem/D
+// URL: https://codeforces.com/contest/2210/problem/C1
 
 
 #include<set>
@@ -45,28 +45,20 @@ using ld = long double;
 const double EPS = (1e-7);
 
 
+ll lcm(ll a, ll b) {if (a==0 || b == 0) return 0; return (a * b) / __gcd(a, b);}
 void solve() {
-    int n, x, y;
-    cin >> n >> x >> y;
-    x--;y--;
-
-    vector<int> a,b;
-    for(int i = 0; i < n; i++){
-        int z;cin >> z;
-        if(i <= x || i > y) a.push_back(z);
-        else b.push_back(z);
+    int n; cin >> n;
+    vector<ll> a(n);
+    for(int i=0; i<n; i++) cin >> a[i];
+    for(int i=0; i<n; i++) {int x;cin >> x;}
+    ll ans = 0, m;
+    for(int i = 0; i < n; i++) {
+       if (i == 0) m = __gcd(a[i],a[i+1]);
+       else if (i == n-1) m= __gcd(a[i- 1],a[i]);
+       else m = lcm(__gcd(a[i-1], a[i]), __gcd(a[i], a[i+1]));
+       ans += (m < a[i]);
     }
-
-    // auto min_b = 
-    if(!b.empty()){
-        rotate(b.begin(),min_element(all(b)),b.end());
-    } 
-    int m= (b.empty()? -1 : b[0]);
-    auto it=a.begin();
-    while (it!=a.end() && *it<m)it++;
-    a.insert(it,all(b));
-    cout<<a<<"\n";
- 
+    cout << ans << "\n";
 }
 
 int main() {

@@ -1,29 +1,8 @@
-// belal_cp_temp
-/*                                         ......  
-                                      ..:::^^^^^. 
-                                   .::^^^^^^:^^:. 
-                                .:^^~~~^^~~~^:^:  
-                             .:^~~^^::.:^~~~^~^   
-                      .....:^^^^::.     :^~^^:    
-                   ::^^^^^~~^^^::.      ^~~^:     
-                .:^^:^^^^~^^^^~^^:^.   ^~^^:      
-              .:^^^^^^^^~^~~^~~^^^^^:.^~^^.       
-             .^^:::^^^^~!!~~~~~~^^:^^^~^:.        
-            .^^:^^^^^^~!!^^~~~^^^^^:^^:.          
-            :^^^~^^^~~~!^^^~^^^^^^^^^:            
-            :^^~^^~~~^~~~~~~~^^^^^^^^:            
-           :^~~^^^^~~~~^^^~~~~^^^^:^:.            
-         .^~~::^~~~~~^^^^^~~^^^^^^^:.             
-        :^~~..^^^^^^^^^^^^^^^^:^:::.              
-      .^^~~.  .^^^^:^^^^^^^^^^:::.                
-     :^^~^.     .:::::^^^^^^::..                  
-    :^^~~:      ..^^^:....:.                      
-   :^^~~^^:..:^^~~^^..                            
-  .^^^~~~~^^~^~~^:.                               
-  :^^^^^^^~~^::.                                  
-  :^^^^^^:...                                     
-  .:.....                                         
-*/
+/* Deliberate practice > blind repetition */
+// Author: Belal
+// URL: https://codeforces.com/contest/2170/problem/B
+
+
 #include<set>
 #include<map>
 #include<list>
@@ -65,22 +44,27 @@ using ld = long double;
 
 const double EPS = (1e-7);
 
-
-void solve(){
-
+void solve() {
     int n; cin >> n;
-    vector<int> b(n);
-    int nonzeros = 0, sum = 0;
-    for (int i = 0; i < n; ++i) {
-        cin >> b[i];
-        nonzeros += (b[i] != 0);
-        sum += b[i];
+    vector<int> a(n); cin >> a;
+    ll nonzero = 0, sum = 0;
+    for(int &x : a) {
+        if(x > 0) nonzero++;
+        sum+=x;
     }
- 
-    sum -= n - 1;
-    cout << min(sum, nonzeros) << endl;
-}
-    
+    ll l = 1,r = n, ans=1;
+    while(l <= r) {
+        ll mid=l + (r - l) / 2;
+        if(sum - mid >= n - 1) {
+            ans = mid;
+            l = mid + 1;
+        }
+        else {
+            r = mid - 1;
+        }
+    }
+    cout<< min(nonzero,ans) <<'\n';
+}  
 
 int main() {
     fast_io;

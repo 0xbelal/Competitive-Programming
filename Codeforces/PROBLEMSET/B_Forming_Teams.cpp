@@ -1,6 +1,6 @@
 /* Deliberate practice > blind repetition */
 // Author: Belal
-// URL: https://codeforces.com/contest/2200/problem/D
+// URL: https://codeforces.com/contest/216/problem/B
 
 
 #include<set>
@@ -43,30 +43,39 @@ using ld = long double;
 #define ss second
 
 const double EPS = (1e-7);
-
-
+const int N = 101;
+vector<int> a[N];
+int vis[N];
+bool cycle = false;
+int cnt = 1;
+void dfs(int v, int par){
+    vis[v] = 1;
+    for(int x : a[v]){ 
+        if(!vis[x]) { cnt++; dfs(x, v); }
+        else if(x != par) { cycle = true; } 
+    }
+}
 void solve() {
-    int n, x, y;
-    cin >> n >> x >> y;
-    x--;y--;
 
-    vector<int> a,b;
-    for(int i = 0; i < n; i++){
-        int z;cin >> z;
-        if(i <= x || i > y) a.push_back(z);
-        else b.push_back(z);
+    int n,m;cin>>n>>m;
+    while(m--){
+        int x,y;cin>>x>>y;
+        a[x].push_back(y);
+        a[y].push_back(x);
+    }
+  int odd_cycles = 0;
+    for(int i = 1; i <= n; i++){
+        if(!vis[i]){
+            cnt = 1;
+            dfs(i, i);
+            if(cycle && cnt % 2 == 1) odd_cycles++; 
+            cycle = false;
+        }
     }
 
-    // auto min_b = 
-    if(!b.empty()){
-        rotate(b.begin(),min_element(all(b)),b.end());
-    } 
-    int m= (b.empty()? -1 : b[0]);
-    auto it=a.begin();
-    while (it!=a.end() && *it<m)it++;
-    a.insert(it,all(b));
-    cout<<a<<"\n";
- 
+    int total = n - odd_cycles;         
+    if(total % 2 == 1) total--;         
+    cout << n - total;  
 }
 
 int main() {
@@ -74,7 +83,7 @@ int main() {
 
     int t = 1;
 
-    cin >> t;
+    // cin >> t;
     while (t--) {
         solve();
     }

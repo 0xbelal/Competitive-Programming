@@ -1,6 +1,6 @@
 /* Deliberate practice > blind repetition */
 // Author: Belal
-// URL: https://codeforces.com/contest/2200/problem/D
+// URL: https://codeforces.com/contest/287/problem/B
 
 
 #include<set>
@@ -44,29 +44,31 @@ using ld = long double;
 
 const double EPS = (1e-7);
 
+ll can(int mid,int k){
+    ll tot = k - 1, non = tot - mid;
+    ll tot_sum = (tot * (tot + 1)) / 2;
+    ll non_sum = (non * (non + 1)) / 2;
+    return tot_sum - non_sum;
+}
 
 void solve() {
-    int n, x, y;
-    cin >> n >> x >> y;
-    x--;y--;
 
-    vector<int> a,b;
-    for(int i = 0; i < n; i++){
-        int z;cin >> z;
-        if(i <= x || i > y) a.push_back(z);
-        else b.push_back(z);
+    ll n, k; cin >> n >> k;
+    if (n == 1){ cout << 0; return; }
+
+    if ( ((k - 1) * k / 2) < n - 1){ cout << -1; return; }
+    ll l = 1, r = k - 1, mid, ans = k - 1;
+    while (l <= r)
+    {
+        mid = l + (r - l) / 2;
+        if (can(mid, k) >= n - 1){
+            ans = mid;
+            r = mid - 1;
+        }else l = mid + 1;
     }
 
-    // auto min_b = 
-    if(!b.empty()){
-        rotate(b.begin(),min_element(all(b)),b.end());
-    } 
-    int m= (b.empty()? -1 : b[0]);
-    auto it=a.begin();
-    while (it!=a.end() && *it<m)it++;
-    a.insert(it,all(b));
-    cout<<a<<"\n";
- 
+    cout << ans;
+    
 }
 
 int main() {
@@ -74,7 +76,7 @@ int main() {
 
     int t = 1;
 
-    cin >> t;
+    // cin >> t;
     while (t--) {
         solve();
     }
