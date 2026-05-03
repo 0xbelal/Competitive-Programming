@@ -62,11 +62,8 @@ void solve() {
     if (fl == -1) {
         cout << fr << " " << lr + 1 << endl;
     } else if (fr == -1) {
-        
         cout << ll << " " << fl - 1 << endl;
     } else {
-        // Both exist
-        // Alice moved through the R's and stopped at the start of the L's
         cout << fr << " " << fl << endl;
     }   
 }

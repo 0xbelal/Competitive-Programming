@@ -47,12 +47,7 @@ const double EPS = (1e-7);
 
 void solve() {
 
-    int theta; cin >> theta;
-    // O * n = (n * 180 - 360)
-    // O * n - 180 * n = -360  
-    // n(O - 180) = -360
-    // n =  360 / 180 - O 
-    
+    int theta; cin >> theta; 
     if(360 % (180 - theta) == 0) cout<<"YES\n";
     else cout<< "NO\n";
 }

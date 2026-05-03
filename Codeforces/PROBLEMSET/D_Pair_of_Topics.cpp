@@ -51,7 +51,7 @@ void solve() {
     vector<int> a(n), b(n); cin >> a >> b;
     for(int i = 0; i < n; i++) a[i] -= b[i];
     sort(all(a));
-    int ans = 0, l = 0, r = n - 1;
+    ll ans = 0, l = 0, r = n - 1;
     while (l < r)
     {
         if (a[l] + a[r] > 0){

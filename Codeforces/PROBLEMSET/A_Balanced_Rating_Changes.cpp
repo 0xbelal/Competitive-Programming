@@ -59,7 +59,7 @@ void solve() {
         b[i] = x;
     }
 
-    int gap = pos_sum + neg_sum;
+    ll gap = pos_sum + neg_sum;
     if(gap > 0){
         for(int i = 0;gap > 0 && i < n; i++){
             if(a[i] < 0 && abs(a[i]) & 1) {

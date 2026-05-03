@@ -52,7 +52,7 @@ void solve() {
     for(int i = 1; i *i <= x;i++){
         if(x% i == 0) {
             if(n <= x/i) ans =max(ans, i);
-            if (n <= i) ans = (ans, x/i);
+            if (n <= i) ans = max(ans, x/i);
         }
     }
     cout << ans << "\n";

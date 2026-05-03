@@ -1,6 +1,6 @@
 /* Deliberate practice > blind repetition */
 // Author: Belal
-// URL: 
+// URL: https://codeforces.com/contest/2143/problem/B
 
 
 #include<set>
@@ -47,7 +47,10 @@ const double EPS = (1e-7);
 
 void solve() {
 
-
+    int n,k;cin >> n >> k;
+    vector<int> prices(n); cin >> prices;
+    vector<int> discs(k); cin >> discs;
+    
     
 }
 
@@ -56,7 +59,7 @@ int main() {
 
     int t = 1;
 
-    // cin >> t;
+    cin >> t;
     while (t--) {
         solve();
     }

@@ -47,7 +47,7 @@ const double EPS = (1e-7);
 
 void solve() {
     int x; cin >> x;
-    cout << x + ((x < 0 ) ? -1 : 1 ) << '\n';    
+    cout << x << '\n';    
 }
 
 int main() {

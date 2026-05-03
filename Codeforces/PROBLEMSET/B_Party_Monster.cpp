@@ -1,6 +1,6 @@
 /* Deliberate practice > blind repetition */
 // Author: Belal
-// URL: https://codeforces.com/contest/682/problem/A
+// URL: https://codeforces.com/contest/2227/problem/B
 
 
 #include<set>
@@ -47,22 +47,17 @@ const double EPS = (1e-7);
 
 void solve() {
 
-    int n,m; cin >> n >> m;
-    // m = max(m,n);
-    // n = min(m,n);
+    int n; cin >> n;
+    string s; cin >> s;
+    int l_cnt = 0, r_cnt = 0;
+    for (char c : s){
+        if (c == '(') l_cnt++;
+        else r_cnt++;
+    }
 
-    vector<int> cnt(6,0);
-    for(int i = 1; i <= 5; i++){
-        for(int j = 1; j <= m; j++){
-            if((i + j) % 5 == 0) cnt[i]++;
-        }
-    }
+    if ((n & 1) || l_cnt != r_cnt) cout << "NO\n";
+    else cout << "YES\n" ;
     
-    ll ans = 0;
-    for(int i = 0; i < n;i++){
-        ans += cnt[i % 5 + 1];
-    }
-    cout<< ans;
 }
 
 int main() {
@@ -70,7 +65,7 @@ int main() {
 
     int t = 1;
 
-    // cin >> t;
+    cin >> t;
     while (t--) {
         solve();
     }

@@ -1,6 +1,6 @@
 /* Deliberate practice > blind repetition */
 // Author: Belal
-// URL: https://codeforces.com/contest/682/problem/A
+// URL: https://codeforces.com/group/oLXNuV6krr/contest/687746/problem/M
 
 
 #include<set>
@@ -18,6 +18,7 @@
 #include<fstream>
 #include<algorithm>
 #include<assert.h>
+#include <climits>
 
 using namespace std;
 
@@ -44,33 +45,37 @@ using ld = long double;
 
 const double EPS = (1e-7);
 
-
 void solve() {
+    int n, q; cin >> n >> q;
+    vector<ll> a(n); cin >> a;
+    int l = 0, r = n - 1;
+    ll t = 0;
+    vector<pair<ll, int>> ans={{0, n}};
 
-    int n,m; cin >> n >> m;
-    // m = max(m,n);
-    // n = min(m,n);
+    while (l < r) {
+        ll step = min(a[l], a[r]);
+        t += step;
+        a[l] -= step;
+        a[r] -= step;
+        if (!a[l]) l++;
+        if (!a[r]) r--;
+        ans.push_back({t, r - l + 1});
+    }
+    if (l == r) ans.push_back({t + a[l], 0});
 
-    vector<int> cnt(6,0);
-    for(int i = 1; i <= 5; i++){
-        for(int j = 1; j <= m; j++){
-            if((i + j) % 5 == 0) cnt[i]++;
-        }
+    while (q--) {
+        ll s; cin >> s;
+        auto it = upper_bound(all(ans), make_pair(s, INT_MAX));
+        cout << prev(it)->second << "\n";
     }
-    
-    ll ans = 0;
-    for(int i = 0; i < n;i++){
-        ans += cnt[i % 5 + 1];
-    }
-    cout<< ans;
+    cout << "\n";
 }
-
 int main() {
     fast_io;
 
     int t = 1;
 
-    // cin >> t;
+    cin >> t;
     while (t--) {
         solve();
     }

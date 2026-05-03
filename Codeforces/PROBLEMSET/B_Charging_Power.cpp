@@ -1,6 +1,6 @@
 /* Deliberate practice > blind repetition */
 // Author: Belal
-// URL: https://codeforces.com/contest/682/problem/A
+// URL: https://codeforces.com/group/oLXNuV6krr/contest/687746/problem/B
 
 
 #include<set>
@@ -44,25 +44,27 @@ using ld = long double;
 
 const double EPS = (1e-7);
 
+const int N = 3005;
+vector<int> adj[N];
+vector<int> pows(N);
+int vis[N];
+int n, m, k;
 
-void solve() {
 
-    int n,m; cin >> n >> m;
-    // m = max(m,n);
-    // n = min(m,n);
-
-    vector<int> cnt(6,0);
-    for(int i = 1; i <= 5; i++){
-        for(int j = 1; j <= m; j++){
-            if((i + j) % 5 == 0) cnt[i]++;
-        }
-    }
+void dfs(int u){
     
-    ll ans = 0;
-    for(int i = 0; i < n;i++){
-        ans += cnt[i % 5 + 1];
+}
+void solve() {
+    
+    cin >> n >> m >> k;
+    for(int i = 0; i < n; i++) cin >> pows[i];
+    for(int i = 1; i < n; i++){
+        int x, y; cin >> x >> y;
+        adj[x].push_back(y);
+        adj[y].push_back(x);
     }
-    cout<< ans;
+
+
 }
 
 int main() {

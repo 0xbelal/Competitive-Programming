@@ -47,10 +47,9 @@ const double EPS = (1e-7);
 
 void solve() {
     vector<int> a(7); cin >> a;
-    int sum = 0;
     sort(all(a));
-    sum += a[6];
-    for(int i = 0; i < 6; i++) sum += (-1 * a[i]);
+    int sum = a[6];
+    for(int i = 0; i < 6; i++) sum -= a[i];
     cout << sum << "\n";
 
 }

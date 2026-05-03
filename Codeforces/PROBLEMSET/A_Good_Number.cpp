@@ -51,7 +51,6 @@ void solve() {
     for (int i = 1; i<= n; i++){
         string num; cin>>num;
         set<char> disc;
-        bool good = true;
         for(char &c : num){
             if (c - '0' <= k) disc.insert(c-'0');
         }

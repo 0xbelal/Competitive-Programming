@@ -49,7 +49,7 @@ void solve() {
 
     int n; cin >> n;
     string s; cin >> s;
-    int ans = 0,z = -1, o = -1;
+    int ans = 0,z = -2, o = -2;
     for (int i = 0; i < n; i++){
         if(s[i] == '0') z = max(0,max(z + 1, o));
         else o = max(0,max(o + 1, z));

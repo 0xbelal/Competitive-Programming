@@ -1,6 +1,6 @@
 /* Deliberate practice > blind repetition */
 // Author: Belal
-// URL: 
+// URL: https://codeforces.com/contest/2210/problem/D
 
 
 #include<set>
@@ -56,7 +56,7 @@ int main() {
 
     int t = 1;
 
-    // cin >> t;
+    cin >> t;
     while (t--) {
         solve();
     }

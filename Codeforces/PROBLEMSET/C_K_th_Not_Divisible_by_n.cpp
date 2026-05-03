@@ -49,9 +49,9 @@ ll cnt_div(ll mid, ll n){
 }
 void solve() {
 
-    int n, k, ans; cin >> n >> k;
+    int n, k; cin >> n >> k;
 
-    ll l = 1, r = 2 * 1e9 * 1e9;
+    ll l = 1, r = 2 * 1e9 * 1e9, ans;
     while (l <= r)
     {
         ll mid = l + (r - l) / 2;
